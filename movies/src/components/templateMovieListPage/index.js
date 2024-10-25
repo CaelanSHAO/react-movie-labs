@@ -3,7 +3,19 @@ import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid2";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from 'react-query/devtools';
 
+const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 360000,
+        refetchInterval: 360000, 
+        refetchOnWindowFocus: false
+      },
+    },
+  });
+  
 function MovieListPageTemplate({ movies, title, selectFavorite }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
