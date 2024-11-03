@@ -1,3 +1,4 @@
+import React, { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -10,20 +11,19 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid2";
-import img from '../../images/film-poster-placeholder.png'
+import img from '../../images/film-poster-placeholder.png';
 import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
-import React, { useContext  } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
 
 export default function MovieCard({ movie, action }) {
-
   const { favorites, addToFavorites } = useContext(MoviesContext);
 
+  // 检查电影是否在收藏夹中
   if (favorites.find((id) => id === movie.id)) {
     movie.favorite = true;
   } else {
-    movie.favorite = false
+    movie.favorite = false;
   }
 
   const handleAddToFavorite = (e) => {
@@ -33,6 +33,7 @@ export default function MovieCard({ movie, action }) {
 
   return (
     <Card>
+      {/* CardHeader 显示电影标题和收藏图标 */}
       <CardHeader
         avatar={
           movie.favorite ? (
@@ -47,6 +48,8 @@ export default function MovieCard({ movie, action }) {
           </Typography>
         }
       />
+      
+      {/* CardMedia 显示电影海报 */}
       <CardMedia
         sx={{ height: 500 }}
         image={
@@ -55,15 +58,17 @@ export default function MovieCard({ movie, action }) {
             : img
         }
       />
+      
+      {/* CardContent 显示上映日期和评分 */}
       <CardContent>
         <Grid container>
-          <Grid size={{xs: 6}}>
+          <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <CalendarIcon fontSize="small" />
               {movie.release_date}
             </Typography>
           </Grid>
-          <Grid size={{xs: 6}}>
+          <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <StarRateIcon fontSize="small" />
               {"  "} {movie.vote_average}{" "}
@@ -72,16 +77,18 @@ export default function MovieCard({ movie, action }) {
         </Grid>
       </CardContent>
 
+      {/* CardActions 显示操作按钮 */}
       <CardActions disableSpacing>
-      
-        {action(movie)}
-      
+        {action ? action(movie) : (
+          <IconButton aria-label="add to favorites" onClick={handleAddToFavorite}>
+            <FavoriteIcon color={movie.favorite ? "error" : "disabled"} />
+          </IconButton>
+        )}
         <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
           </Button>
         </Link>
-        
       </CardActions>
     </Card>
   );
