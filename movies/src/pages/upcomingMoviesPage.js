@@ -1,4 +1,3 @@
-// src/pages/upcomingMoviesPage.js
 import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import { getUpcomingMovies } from "../api/tmdb-api";
