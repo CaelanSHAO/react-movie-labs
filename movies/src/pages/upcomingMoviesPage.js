@@ -14,7 +14,7 @@ const UpcomingMoviesPage = () => {
     return <Spinner />;
   }
 
-  if (isError) {
+  if (isError) {s
     return <h1>{error.message}</h1>;
   }
 
