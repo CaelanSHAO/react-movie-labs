@@ -1,45 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, createContext, useContext } from "react";
 
-export const MoviesContext = React.createContext(null);
+export const MoviesContext = createContext();
 
-const MoviesContextProvider = (props) => {
-  const [favorites, setFavorites] = useState( [] )
+const MoviesContextProvider = ({ children }) => {
+  const [favorites, setFavorites] = useState([]);
+  const [mustWatch, setMustWatch] = useState([]); // 新增的状态变量
 
   const addToFavorites = (movie) => {
-    let newFavorites = [];
-    if (!favorites.includes(movie.id)){
-      newFavorites = [...favorites, movie.id];
-    }
-    else{
-      newFavorites = [...favorites];
-    }
-    setFavorites(newFavorites)
+    setFavorites([...favorites, movie.id]);
   };
 
-  const [myReviews, setMyReviews] = useState( {} ) 
-  
-  // We will use this function in the next step
-  const removeFromFavorites = (movie) => {
-    setFavorites( favorites.filter(
-      (mId) => mId !== movie.id
-    ) )
+  // 添加电影到 mustWatch 列表的函数
+  const addToMustWatch = (movieId) => {
+    if (!mustWatch.includes(movieId)) {
+      setMustWatch([...mustWatch, movieId]);
+    }
   };
-
-  const addReview = (movie, review) => {
-    setMyReviews( {...myReviews, [movie.id]: review } )
-  };
-  //console.log(myReviews);
 
   return (
     <MoviesContext.Provider
       value={{
         favorites,
         addToFavorites,
-        removeFromFavorites,
-        addReview,
+        mustWatch,          // 提供 mustWatch 状态
+        addToMustWatch,     // 提供添加函数
       }}
     >
-      {props.children}
+      {children}
     </MoviesContext.Provider>
   );
 };
