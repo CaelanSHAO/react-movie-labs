@@ -27,8 +27,8 @@ const SiteHeader = () => {
   const menuOptions = [
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favorites" },
-    { label: "Upcoming", path: "/movies/upcoming" },  // 更新此项
-    { label: "Option 4", path: "/" },
+    { label: "Upcoming", path: "/movies/upcoming" },  
+    { label: "Trending Today", path: "/trending/today" },
   ];
 
   const handleMenuSelect = (pageURL) => {
