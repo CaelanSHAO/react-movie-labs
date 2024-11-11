@@ -12,6 +12,8 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import TrendingTodayPage from "./pages/trendingTodayPage";
+import NowPlayingPage from "./pages/nowPlayingPage";
+
 
 
 
@@ -42,7 +44,7 @@ const App = () => {
             
             <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
             <Route path="/trending/today" element={<TrendingTodayPage />} />
-
+            <Route path="/movie/now_playing" element={<NowPlayingPage />} />
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
