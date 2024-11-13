@@ -15,25 +15,33 @@ import img from '../../images/film-poster-placeholder.png';
 import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import { MoviesContext } from "../../contexts/moviesContext";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
 export default function MovieCard({ movie, action }) {
   const { favorites, addToFavorites } = useContext(MoviesContext);
 
-  // 检查电影是否在收藏夹中
+  
   if (favorites.find((id) => id === movie.id)) {
     movie.favorite = true;
   } else {
     movie.favorite = false;
   }
 
+  movie.inWatchlist = watchlist.includes(movie.id);
+
   const handleAddToFavorite = (e) => {
     e.preventDefault();
     addToFavorites(movie);
   };
 
+  const handleAddToWatchlist = (e) => {
+    e.preventDefault();
+    handleAddToWatchlist(movie);
+  };
+
   return (
     <Card>
-      {/* CardHeader 显示电影标题和收藏图标 */}
+      {}
       <CardHeader
         avatar={
           movie.favorite ? (
@@ -49,7 +57,7 @@ export default function MovieCard({ movie, action }) {
         }
       />
       
-      {/* CardMedia 显示电影海报 */}
+      {}
       <CardMedia
         sx={{ height: 500 }}
         image={
@@ -59,7 +67,7 @@ export default function MovieCard({ movie, action }) {
         }
       />
       
-      {/* CardContent 显示上映日期和评分 */}
+      {}
       <CardContent>
         <Grid container>
           <Grid item xs={6}>
@@ -77,12 +85,18 @@ export default function MovieCard({ movie, action }) {
         </Grid>
       </CardContent>
 
-      {/* CardActions 显示操作按钮 */}
+     
       <CardActions disableSpacing>
         {action ? action(movie) : (
+          <>
           <IconButton aria-label="add to favorites" onClick={handleAddToFavorite}>
             <FavoriteIcon color={movie.favorite ? "error" : "disabled"} />
           </IconButton>
+
+          <IconButton aria-label="add to watchlist" onClick={handleAddToWatchlist}>
+           <PlaylistAddIcon color={movie.inWatchlist ? "error" : "disabled"} />
+          </IconButton>
+          </>
         )}
         <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">

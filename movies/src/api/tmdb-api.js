@@ -73,6 +73,8 @@ export const getTrendingToday = ({ queryKey }) => {
  });
 };
   
+
+
   export const getGenres = () => {
     return fetch(
       "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
