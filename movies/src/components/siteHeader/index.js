@@ -1,4 +1,3 @@
-// src/components/siteHeader/index.js
 import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -30,7 +29,7 @@ const SiteHeader = () => {
     { label: "Upcoming", path: "/movies/upcoming" },  
     { label: "Trending Today", path: "/trending/today" },
     { label: "Now Playing", path: "/movie/now_playing" },
-    { label: "Watchlist", path: "/movie/watchlist" },
+    
   
   ];
 
