@@ -1,14 +1,14 @@
-import React from "react";
+import React  from "react";
 import { getTrendingToday } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import { useParams } from "react-router-dom";
+const TrendingTodayPage = () => {
 
-
-const TrendingTodayPage = (props) => {
-
-const {  data, error, isLoading, isError }  = useQuery(['trending',{day:'day'}], getTrendingToday)
+const {timeWindow} = useParams()
+const {  data, error, isLoading, isError }  = useQuery(['trending',{timeWindow}], getTrendingToday)
 
   if (isLoading) {
     return <Spinner />
@@ -23,8 +23,9 @@ const {  data, error, isLoading, isError }  = useQuery(['trending',{day:'day'}],
   
   return (
     <>
+
       <PageTemplate
-        title="Trending Today Movies"
+        title={`Trending ${timeWindow === "day"? "Today" : "This Week"} Movies`}
         movies={movies}
         action={(movie) => {
           return <AddToFavoritesIcon movie={movie} />;

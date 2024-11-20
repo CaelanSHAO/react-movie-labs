@@ -11,12 +11,14 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Select from "@mui/material/Select";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [timeWindow, setTimeWindow] = useState("day");
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -27,7 +29,7 @@ const SiteHeader = () => {
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/movies/upcoming" },  
-    { label: "Trending Today", path: "/trending/today" },
+    { label: `Trending (${timeWindow})`, path: `/movies/trending/${timeWindow}` },
     { label: "Now Playing", path: "/movie/now_playing" },
     
   
@@ -51,6 +53,14 @@ const SiteHeader = () => {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             All you ever wanted to know about Movies!
           </Typography>
+          <Select
+            value={timeWindow} 
+            onChange={(e) => setTimeWindow(e.target.value)} 
+            sx={{ marginLeft: "1rem", color: "white", borderColor: "white" }}
+          >
+            <MenuItem value="day">Day</MenuItem>
+            <MenuItem value="week">Week</MenuItem>
+          </Select>
             {isMobile ? (
               <>
                 <IconButton
@@ -62,6 +72,7 @@ const SiteHeader = () => {
                 >
                   <MenuIcon />
                 </IconButton>
+                
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
