@@ -85,9 +85,9 @@ const queryClient = new QueryClient({
   return(
     <Box sx={{ padding: "20px", backgroundColor: "#f9f9f9" }}>
       <Header title={title} />
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
 
-      <Grid item xs={5} sm={4} md={3} lg={3} xl={3}>
+      <Grid item xs={12} sm={4} md={3} lg={3} xl={3}>
           <Box
             sx={{
               padding: "16px",
@@ -106,7 +106,7 @@ const queryClient = new QueryClient({
           </Box>
         </Grid>
 
-        <Grid item xs={7} sm={8} md={9} lg={9} xl={9}>
+        <Grid item xs={12} sm={8} md={9} lg={9} xl={9}>
           <Box
             sx={{
               display: "flex",

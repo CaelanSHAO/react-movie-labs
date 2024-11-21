@@ -3,9 +3,9 @@ import axios from 'axios';
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
 
-export const getMovies = () => {
+export const getMovies = (page=1) => {
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
