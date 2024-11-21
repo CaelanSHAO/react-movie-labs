@@ -16,7 +16,8 @@ import NowPlayingPage from "./pages/nowPlayingPage";
 import MovieDetails from './pages/movieDetailsPage';
 import PersonDetailsPage from "./pages/PersonDetailsPage";
 import ActorDetailsPage from "./pages/actorDetailsPage"; 
-
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import theme from "./theme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +32,8 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
       <BrowserRouter>
         <SiteHeader />
         <MoviesContextProvider>
@@ -54,6 +57,7 @@ const App = () => {
         </MoviesContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
+     </ThemeProvider>
     </QueryClientProvider>
   );
 };
