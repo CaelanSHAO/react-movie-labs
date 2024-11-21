@@ -26,7 +26,11 @@ export default function MovieCard({movie, action}) {
   }
   
   return (
-    <Card>
+    <Card
+     sx={{
+      maxWidth
+     }}
+    >
       <CardHeader
         avatar={
           movie.favorite ? (

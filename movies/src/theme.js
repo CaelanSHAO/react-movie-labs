@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
     palette: {
-      mode: 'dark',
+      mode: 'light', 
       primary: {
         main: '#1976d2',
       },
@@ -17,6 +17,7 @@ const theme = createTheme({
         secondary: '#757575',
       },
     },
+
     typography: {
       fontFamily: 'Roboto, Arial, sans-serif',
       h1: {
@@ -29,6 +30,17 @@ const theme = createTheme({
         fontSize: '1rem',
       },
     },
+    
+    breakpoints:{
+        values: {
+            xs: 0,
+            sm: 600,
+            md: 960,
+            lg: 1280,
+            xl: 1920,
+          },  
+    },
+    
   });
   
   export default theme;
