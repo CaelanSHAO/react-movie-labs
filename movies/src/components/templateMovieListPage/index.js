@@ -21,6 +21,8 @@ const queryClient = new QueryClient({
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
 
+  const [sortKey, setSortKey] = useState("title");
+
   let displayedMovies = movies
     .filter((m) => {
       return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
@@ -28,6 +30,15 @@ const queryClient = new QueryClient({
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
     });
+
+    .sort((a,b)=>{
+      if(sortKey==="title") return a.title.localeCompare(b.title);
+      if(sortKey==="rating") return b.vote_average-a.vote_average;
+      if(sortKey==="release_date") return new Date(b.release_date)-new Date(a.release_date) ;
+      return 0;
+    });
+
+  const handleSortChange = (value) => setSortKey(value);
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
