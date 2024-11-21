@@ -73,6 +73,7 @@ const queryClient = new QueryClient({
             titleFilter={nameFilter}
             genreFilter={genreFilter}
             ratingFilter={ratingFilter}
+            onSortChange={handleSortChange}
           />
         </Grid>
          <MovieList action={action} movies={displayedMovies}></MovieList>

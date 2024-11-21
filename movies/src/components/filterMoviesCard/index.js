@@ -117,7 +117,7 @@ export default function FilterMoviesCard(props) {
                 id="sort-select"
                 defaultValue=""
                 value={props.genreFilter}
-                onChange={(e) => handleSortChange(e, "sort", e.target.value)}
+                onChange={(e) => props.onSortChange(e.target.value)}
             >
                <MenuItem value="title">Title</MenuItem>
                <MenuItem value="rating">Rating</MenuItem>
