@@ -28,7 +28,14 @@ export default function MovieCard({movie, action}) {
   return (
     <Card
      sx={{
-      maxWidth
+      maxWidth:345,
+      margin: "20px auto",
+      boxShadow: 3,
+      borderRadius: 2,
+      transition: "transform 0.2s ease-in-out",
+      "&:hover": {
+          transform: "scale(1.05)", //悬停时侯放大
+      },
      }}
     >
       <CardHeader
@@ -40,7 +47,7 @@ export default function MovieCard({movie, action}) {
           ) : null
         }
         title={
-          <Typography variant="h5" component="p">
+          <Typography variant="h5" component="p" noWrap>
             {movie.title}{" "}
           </Typography>
         }
@@ -56,22 +63,22 @@ export default function MovieCard({movie, action}) {
       <CardContent>
         <Grid container>
           <Grid size={{xs: 6}}>
-            <Typography variant="h6" component="p">
-              <CalendarIcon fontSize="small" />
-              {movie.release_date}
+            <Typography variant="subtitle1" component="p">
+              <CalendarIcon fontSize="small"  sx={{ marginRight: "5px" }}/>
+              {movie.release_date || "N/A"}
             </Typography>
           </Grid>
           <Grid size={{xs: 6}}>
-            <Typography variant="h6" component="p">
-              <StarRateIcon fontSize="small" />
-              {"  "} {movie.vote_average}{" "}
+            <Typography variant="subtitle1" component="p">
+              <StarRateIcon fontSize="small" sx={{ marginRight: "5px" }}/>
+              {"  "} {movie.vote_average || "N/A" }{" "}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
         {action(movie)}
-        <Link to={`/movies/${movie.id}`}>
+        <Link to={`/movies/${movie.id}`} >
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
           </Button>
