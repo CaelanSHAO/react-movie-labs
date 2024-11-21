@@ -39,7 +39,7 @@ export default function FilterMoviesCard(props) {
 
   const handleChange = (e, type, value) => {
     e.preventDefault();
-    props.onUserInput(type, value); // NEW
+    props.onUserInput(type, value); 
   };
 
   const handleTextChange = (e, props) => {
@@ -53,6 +53,7 @@ export default function FilterMoviesCard(props) {
   const handleSortChange=(e)=>{
     handleChange(e, "sort", e.target.value);
   };
+
   return (
     <Card 
       sx={{
@@ -90,9 +91,24 @@ export default function FilterMoviesCard(props) {
               );
             })}
           </Select>
-
-          
         </FormControl>
+
+
+        <FormControl sx={{...formControl, marginTop: 2}}>
+          <InputLabel id="rating-label">Rating Range</InputLabel>
+            <Select
+                labelId="rating-label"
+                id="rating-select"
+                defaultValue=""
+                onChange={(e) => handleChange(e, "rating", e.target.value)}
+            >
+           <MenuItem value="0-5">0-5</MenuItem>
+           <MenuItem value="5-7">5-7</MenuItem>
+           <MenuItem value="7-10">7-10</MenuItem>
+          </Select>
+        </FormControl>
+
+
 
         <FormControl sx={{...formControl, marginTop: 2}}>
         <InputLabel id="sort-label">sort by</InputLabel>
@@ -101,7 +117,7 @@ export default function FilterMoviesCard(props) {
                 id="sort-select"
                 defaultValue=""
                 value={props.genreFilter}
-                onChange={(e) => handleChange(e, "sort", e.target.value)}
+                onChange={(e) => handleSortChange(e, "sort", e.target.value)}
             >
                <MenuItem value="title">Title</MenuItem>
                <MenuItem value="rating">Rating</MenuItem>
