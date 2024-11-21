@@ -155,3 +155,22 @@ export const getTrendingToday = ({ queryKey }) => {
     });
     return response.data;
   };
+
+
+  export const getPersonDetails = (personId) => {
+    return fetch(
+      `https://api.themoviedb.org/3/person/${personId}?language=en-US&api_key=${process.env.REACT_APP_TMDB_KEY}`
+    )
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((error) => {
+            throw new Error(error.status_message || "Something went wrong");
+          });
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+  
