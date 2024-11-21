@@ -13,12 +13,14 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Select from "@mui/material/Select";
 
+
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [timeWindow, setTimeWindow] = useState("day");
+  const [personId, setPersonId] = useState("");
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -31,7 +33,7 @@ const SiteHeader = () => {
     { label: "Upcoming", path: "/movies/upcoming" },  
     { label: `Trending (${timeWindow})`, path: `/movies/trending/${timeWindow}` },
     { label: "Now Playing", path: "/movie/now_playing" },
-    
+    { label: "Person Details", path: "/person/12345"}
   
   ];
 
@@ -41,6 +43,12 @@ const SiteHeader = () => {
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handlePersonSearch = () => {
+    if (personId.trim()) {
+      navigate(`/person/${personId.trim()}`, { replace: true });
+    }
   };
 
   return (
@@ -53,6 +61,24 @@ const SiteHeader = () => {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             All you ever wanted to know about Movies!
           </Typography>
+
+          <input
+            type="text"
+            placeholder="Enter Person ID"
+            value={personId}
+            onChange={(e) => setPersonId(e.target.value)}
+            style={{
+              marginLeft: "1rem",
+              padding: "5px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
+          />
+          <Button color="inherit" onClick={handlePersonSearch}>
+            Search
+          </Button>
+
+
           <Select
             value={timeWindow} 
             onChange={(e) => setTimeWindow(e.target.value)} 
