@@ -4,7 +4,7 @@ import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid2";
 import { QueryClientProvider, QueryClient } from "react-query";
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { Box } from "@mui/material";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -57,7 +57,7 @@ const queryClient = new QueryClient({
     else if (type === "rating") setRatingFilter(value);
   };
 
-  return (
+  /* return (
     <Grid container>
       <Grid size={12}>
         <Header title={title} />
@@ -79,6 +79,49 @@ const queryClient = new QueryClient({
          <MovieList action={action} movies={displayedMovies}></MovieList>
       </Grid>
     </Grid>
+  );
+ */
+  
+  return(
+    <Box sx={{ padding: "20px", backgroundColor: "#f9f9f9" }}>
+      <Header title={title} />
+      <Grid container spacing={2}>
+
+      <Grid item xs={5} sm={4} md={3} lg={3} xl={3}>
+          <Box
+            sx={{
+              padding: "16px",
+              backgroundColor: "#dce775",
+              borderRadius: "8px",
+              boxShadow: 3,
+            }}
+          >
+            <FilterCard
+              onUserInput={handleChange}
+              titleFilter={nameFilter}
+              genreFilter={genreFilter}
+              ratingFilter={ratingFilter}
+              onSortChange={handleSortChange}
+            />
+          </Box>
+        </Grid>
+
+        <Grid item xs={7} sm={8} md={9} lg={9} xl={9}>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "16px",
+              justifyContent: "flex-start",
+            }}
+          >
+            <MovieList action={action} movies={displayedMovies} />
+          </Box>
+        </Grid>
+
+      </Grid>
+    </Box>
+  
   );
 }
 export default MovieListPageTemplate;

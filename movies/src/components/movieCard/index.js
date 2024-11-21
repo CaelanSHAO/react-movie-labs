@@ -28,8 +28,10 @@ export default function MovieCard({movie, action}) {
   return (
     <Card
      sx={{
-      maxWidth:345,
-      margin: "20px auto",
+      maxWidth:"345px",
+      width: "100%",
+      margin: "auto",
+      padding: "20px",
       boxShadow: 3,
       borderRadius: 2,
       transition: "transform 0.2s ease-in-out",
