@@ -33,7 +33,7 @@ const SiteHeader = () => {
     { label: "Upcoming", path: "/movies/upcoming" },  
     { label: `Trending (${timeWindow})`, path: `/movies/trending/${timeWindow}` },
     { label: "Now Playing", path: "/movie/now_playing" },
-    { label: "Person Details", path: "/person/12345"}
+    //{ label: "Person Details", path: "/person/12345"}
   
   ];
 

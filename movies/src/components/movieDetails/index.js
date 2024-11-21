@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
-
+import { Link } from "react-router-dom";
 
 const root = {
     display: "flex",
@@ -33,6 +33,9 @@ const MovieDetails = ({ movie }) => {
       <Typography variant="h6" component="p">
         {movie.overview}
       </Typography>
+
+
+
 
       <Paper 
         component="ul" 
@@ -75,6 +78,25 @@ const MovieDetails = ({ movie }) => {
       </Paper>
 
 
+      <Paper component="ul" sx={{ display: "flex", flexWrap: "wrap", padding: 1.5 }}>
+        {movie.credits && movie.credits.cast && movie.credits.cast.length > 0 ? (
+          movie.credits.cast.map((actor) => (
+            <li key={actor.id}>
+              <Chip
+                label={actor.name}
+                component={Link}
+                to={`/person/${actor.id}`} 
+                clickable
+                sx={{ margin: 0.5 }}
+              />
+            </li>
+          ))
+        ) : (
+          <Chip label="No cast data available" sx={{ margin: 0.5 }} />
+        )}
+      </Paper>
+
+
       <Fab
         color="secondary"
         variant="extended"
@@ -91,6 +113,8 @@ const MovieDetails = ({ movie }) => {
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
       </Drawer>
+
+
 
       </>
   );
