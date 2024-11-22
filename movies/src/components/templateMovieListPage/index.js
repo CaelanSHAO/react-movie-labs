@@ -64,7 +64,7 @@ const queryClient = new QueryClient({
           console.error("Failed to fetch movies:", err);
         },
       }
-    );e
+    );
 
 
     const handlePageChange = (event, value) => {
