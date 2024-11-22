@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import img from '../../images/film-poster-placeholder.png';
 import React, { useContext  } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
+import AddToWatchlistIcon from "../cardIcons/addToWatchlist";
 
 export default function MovieCard({movie, action}) {
 
@@ -78,8 +79,11 @@ export default function MovieCard({movie, action}) {
           </Grid>
         </Grid>
       </CardContent>
+
+
       <CardActions disableSpacing>
         {action(movie)}
+        <AddToWatchlistIcon movie={movie} />
         <Link to={`/movies/${movie.id}`} >
           <Button variant="outlined" size="medium" color="primary">
             More Info ...

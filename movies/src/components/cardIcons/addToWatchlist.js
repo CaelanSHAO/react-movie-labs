@@ -8,7 +8,7 @@ const AddToWatchlistIcon = ({ movie }) => {
 
   const handleAddToWatchlist = (e) => {
     e.preventDefault();
-    context.addToWachlist(movie);
+    context.addToWatchlist(movie);
   };
 
   return (

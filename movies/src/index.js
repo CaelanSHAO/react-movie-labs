@@ -17,6 +17,7 @@ import MovieDetails from './pages/movieDetailsPage';
 import PersonDetailsPage from "./pages/PersonDetailsPage";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "./theme";
+import WatchlistMoviesPage from "./pages/watchlistMoviesPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,7 +50,7 @@ const App = () => {
             <Route path="/movies/trending/:timeWindow" element={<TrendingTodayPage />} />
             <Route path="/movie/now_playing" element={<NowPlayingPage />} />
             <Route path="/person/:personId" element={<PersonDetailsPage />} />
-            
+            <Route path="/movies/watchlist" element={<WatchlistMoviesPage />} />
            
           
           </Routes>
