@@ -3,9 +3,13 @@ import axios from 'axios';
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
 
-export const getMovies =async (page=1) => {
+export const getMovies =async ({ page = 1, genreFilter, ratingFilter }) => {
+  const genreParam = genreFilter && genreFilter !== "0" ? `&with_genres=${genreFilter}` : "";
+  const ratingParam = ratingFilter
+    ? `&vote_average.gte=${ratingFilter.split("-")[0]}&vote_average.lte=${ratingFilter.split("-")[1]}`
+    : "";
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}${genreParam}${ratingParam}`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -16,7 +20,7 @@ export const getMovies =async (page=1) => {
   })
   .catch((error) => {
     console.error(`Failed to fetch movies: ${error.message}`);
-    return { results: [], error: error.message }; // 返回空结果和错误信息
+    return { results: [], error: error.message }; 
   });
 };
   

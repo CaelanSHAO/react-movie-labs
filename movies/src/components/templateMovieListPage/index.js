@@ -35,7 +35,7 @@ const queryClient = new QueryClient({
   const totalPages = 20;
 
   
-    const fetchMovies=async(page)=>{
+  /*   const fetchMovies=async(page)=>{
       try {
         const data = await getMovies(page);
         setMovies(data.results || []);
@@ -49,23 +49,22 @@ const queryClient = new QueryClient({
      useEffect(() => {
       fetchMovies(page);
     }, [page]);
-
-    /* const{data, error, isLoading, isError}=useQuery(
-      ["movies", page],
-      () => getMovies(page),
+ */
+    const { data, error, isLoading, isError } = useQuery(
+      ["movies", { page, genreFilter, ratingFilter }],
+      () => getMovies({ page, genreFilter, ratingFilter }),
       {
         keepPreviousData: true,
         onSuccess: (data) => {
-          if (!data.results.length) {
-            console.error("No results found.");
+          if (!data.results || data.results.length === 0) {
+            console.warn("No results found.");
           }
-      },
+        },
         onError: (err) => {
-        console.error("Failed to fetch movies:", err);
-        setPage(1);
-      },
-    }
-    ) */
+          console.error("Failed to fetch movies:", err);
+        },
+      }
+    );e
 
 
     const handlePageChange = (event, value) => {
@@ -78,7 +77,7 @@ const queryClient = new QueryClient({
       setPage(value);
     };
 
-  let displayedMovies = movies
+  let displayedMovies = (data?.results || [])
     .filter((m) => {
       return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
     })
