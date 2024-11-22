@@ -11,12 +11,14 @@ const MoviesContextProvider = (props) => {
     let newFavorites = [];
     if (!favorites.includes(movie.id)){
       newFavorites = [...favorites, movie.id];
+      console.log(newFavorites)
     }
     else{
       newFavorites = [...favorites];
     }
     setFavorites(newFavorites)
   };
+
   
   const removeFromFavorites = (movie) => {
     setFavorites( favorites.filter(

@@ -11,16 +11,17 @@ import FilterMoviesCard from "../components/filterMoviesCard";
 const FavoriteMoviesPage = () => {
   const {favorites: movieIds } = useContext(MoviesContext);
 
+
   
   const favoriteMovieQueries = useQueries(
     movieIds.map((movieId) => {
       return {
-        queryKey: ["movie", { id: movieId }],
+        queryKey: ["favoriteMovie", { id: movieId }],
         queryFn: getMovie,
       };
     })
   );
-  
+
   const isLoading = favoriteMovieQueries.find((m) => m.isLoading === true);
 
   if (isLoading) {
@@ -31,7 +32,6 @@ if(movieIds.length===0){
   return(
     <div style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
       <FilterMoviesCard/>
-    
     </div>
   );
 }

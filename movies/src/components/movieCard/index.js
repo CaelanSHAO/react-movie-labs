@@ -25,7 +25,7 @@ export default function MovieCard({movie, action}) {
   } else {
     movie.favorite = false
   }
-  
+
   return (
     <Card
      sx={{

@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
     },
   });
 
-  function MovieListPageTemplate({title, action }) {
+function MovieListPageTemplate({movies, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
@@ -30,7 +30,6 @@ const queryClient = new QueryClient({
   const [sortKey, setSortKey] = useState("title");
 
 
-  const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const totalPages = 20;
 
@@ -50,21 +49,21 @@ const queryClient = new QueryClient({
       fetchMovies(page);
     }, [page]);
  */
-    const { data, error, isLoading, isError } = useQuery(
-      ["movies", { page, genreFilter, ratingFilter }],
-      () => getMovies({ page, genreFilter, ratingFilter }),
-      {
-        keepPreviousData: true,
-        onSuccess: (data) => {
-          if (!data.results || data.results.length === 0) {
-            console.warn("No results found.");
-          }
-        },
-        onError: (err) => {
-          console.error("Failed to fetch movies:", err);
-        },
-      }
-    );
+    // const { data, error, isLoading, isError } = useQuery(
+    //   ["movies", { page, genreFilter, ratingFilter }],
+    //   () => getMovies({ page, genreFilter, ratingFilter }),
+    //   {
+    //     keepPreviousData: true,
+    //     onSuccess: (data) => {
+    //       if (!data.results || data.results.length === 0) {
+    //         console.warn("No results found.");
+    //       }
+    //     },
+    //     onError: (err) => {
+    //       console.error("Failed to fetch movies:", err);
+    //     },
+    //   }
+    // );
 
 
     const handlePageChange = (event, value) => {
@@ -77,7 +76,7 @@ const queryClient = new QueryClient({
       setPage(value);
     };
 
-  let displayedMovies = (data?.results || [])
+  let displayedMovies = (movies || [])
     .filter((m) => {
       return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
     })
@@ -111,40 +110,17 @@ const queryClient = new QueryClient({
   return(
     <Box sx={{ padding: "20px", backgroundColor: "#f9f9f9" }}>
       <Header title={title} />
-      <Grid container spacing={3}>
-
-        <Grid item xs={12} sm={4} md={3} lg={3} xl={3}>
-          <Box
-            sx={{
-              padding: "16px",
-              backgroundColor: "#dce775",
-              borderRadius: "8px",
-              boxShadow: 3,
-            }}
-          >
-            <FilterCard
-              onUserInput={handleChange}
-              titleFilter={nameFilter}
-              genreFilter={genreFilter}
-              ratingFilter={ratingFilter}
-              onSortChange={handleSortChange}
-            />
-          </Box>
+      <Grid container sx={{flex: "1 1 500px"}}>
+        <Grid item xs={12} sm={3} md={2} lg={2} xl={2}>
+          <FilterCard
+            onUserInput={handleChange}
+            titleFilter={nameFilter}
+            genreFilter={genreFilter}
+            ratingFilter={ratingFilter}
+            onSortChange={handleSortChange}
+          />
         </Grid>
-
-        <Grid item xs={12} sm={8} md={9} lg={9} xl={9}>
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "16px",
-              justifyContent: "flex-start",
-            }}
-          >
-            <MovieList action={action} movies={displayedMovies} />
-          </Box>
-        </Grid>
-
+          <MovieList action={action} movies={displayedMovies} />
       </Grid>
 
       <Box sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
@@ -156,7 +132,6 @@ const queryClient = new QueryClient({
           />) }
       </Box>
     </Box>
-  
   );
 }
 export default MovieListPageTemplate;
