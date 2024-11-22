@@ -1,8 +1,8 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getPersonDetails } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
+import { useParams, Link } from "react-router-dom";
 
 const PersonDetailsPage = () => {
     const { personId } = useParams();
@@ -18,7 +18,7 @@ const PersonDetailsPage = () => {
       if (isError) {
         return <h1>{error.message}</h1>;
       }
-      const { name, biography, birthday, place_of_birth, profile_path, gender } =
+    const { name, biography, birthday, place_of_birth, profile_path, gender,movie_credits} =
       data;
 
       return (
@@ -50,6 +50,19 @@ const PersonDetailsPage = () => {
               ? "Non-binary"
               : "Not specified"}
           </p>
+          <>
+          <h3>Movies:</h3>
+              <ul>
+                {
+                  movie_credits.cast.map((movie)=>(
+                    <li key={movie.id}>
+                      <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                     </li>
+                  ))
+                }
+              </ul>
+
+          </>
         </div>
       );
 

@@ -3,11 +3,12 @@ import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid2";
-import { QueryClientProvider, QueryClient } from "react-query";
+import { QueryClientProvider, QueryClient, useQuery } from "react-query";
 import { Box } from "@mui/material";
 import { Pagination } from "@mui/material";
 import { getMovies } from "../../api/tmdb-api";
 import { get } from "react-hook-form";
+
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -33,18 +34,47 @@ const queryClient = new QueryClient({
   const [page, setPage] = useState(1);
   const totalPages = 20;
 
-  useEffect(()=>{
-    const fetchMovies=async()=>{
+  
+    const fetchMovies=async(page)=>{
       try {
         const data = await getMovies(page);
         setMovies(data.results || []);
        } catch (error) {
         console.error("Failed to fetch movies:", error);
-       }fetchMovies();
+        setMovies([]);
+        setPage(1);
+       }
      };
-  },[page]);
-    
+  
+     useEffect(() => {
+      fetchMovies(page);
+    }, [page]);
+
+    /* const{data, error, isLoading, isError}=useQuery(
+      ["movies", page],
+      () => getMovies(page),
+      {
+        keepPreviousData: true,
+        onSuccess: (data) => {
+          if (!data.results.length) {
+            console.error("No results found.");
+          }
+      },
+        onError: (err) => {
+        console.error("Failed to fetch movies:", err);
+        setPage(1);
+      },
+    }
+    ) */
+
+
     const handlePageChange = (event, value) => {
+      if (value < 1 || value > totalPages) {
+        console.error("Page out of bounds:", value);
+        setPage(1);
+        return;
+    }
+     console.log("Changing to page:", value);
       setPage(value);
     };
 
@@ -71,45 +101,20 @@ const queryClient = new QueryClient({
       return 0;
     });
 
-  const handleSortChange = (value) => setSortKey(value);
+  const handleSortChange = (event) => {setSortKey(event.target.value)};
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
     else if (type === "genre") setGenreFilter(value);
     else if (type === "rating") setRatingFilter(value);
   };
-
-  /* return (
-    <Grid container>
-      <Grid size={12}>
-        <Header title={title} />
-      </Grid>
-      <Grid container sx={{flex: "1 1 500px"}}>
-        <Grid 
-          key="find" 
-          size={{xs: 12, sm: 6, md: 4, lg: 3, xl: 2}} 
-          sx={{padding: "20px"}}
-        >
-          <FilterCard
-            onUserInput={handleChange}
-            titleFilter={nameFilter}
-            genreFilter={genreFilter}
-            ratingFilter={ratingFilter}
-            onSortChange={handleSortChange}
-          />
-        </Grid>
-         <MovieList action={action} movies={displayedMovies}></MovieList>
-      </Grid>
-    </Grid>
-  );
- */
-  
+   
   return(
     <Box sx={{ padding: "20px", backgroundColor: "#f9f9f9" }}>
       <Header title={title} />
       <Grid container spacing={3}>
 
-      <Grid item xs={12} sm={4} md={3} lg={3} xl={3}>
+        <Grid item xs={12} sm={4} md={3} lg={3} xl={3}>
           <Box
             sx={{
               padding: "16px",
@@ -144,12 +149,12 @@ const queryClient = new QueryClient({
       </Grid>
 
       <Box sx={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-          <Pagination 
+      {totalPages > 1 &&(<Pagination 
            count={totalPages}
            page={page}
            onChange={handlePageChange}
            color="primary"
-          />
+          />) }
       </Box>
     </Box>
   

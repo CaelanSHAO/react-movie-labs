@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
 
-export const getMovies = (page=1) => {
+export const getMovies =async (page=1) => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
   ).then((response) => {
@@ -15,7 +15,8 @@ export const getMovies = (page=1) => {
     return response.json();
   })
   .catch((error) => {
-      throw error
+    console.error(`Failed to fetch movies: ${error.message}`);
+    return { results: [], error: error.message }; // 返回空结果和错误信息
   });
 };
   
@@ -159,7 +160,7 @@ export const getTrendingToday = ({ queryKey }) => {
 
   export const getPersonDetails = (personId) => {
     return fetch(
-      `https://api.themoviedb.org/3/person/${personId}?language=en-US&api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `https://api.themoviedb.org/3/person/${personId}?language=en-US&api_key=${process.env.REACT_APP_TMDB_KEY}&append_to_response=movie_credits`
     )
       .then((response) => {
         if (!response.ok) {

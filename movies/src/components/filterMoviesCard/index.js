@@ -84,7 +84,7 @@ export default function FilterMoviesCard(props) {
             <Select
                 labelId="genre-label"
                 id="genre-select"
-                defaultValue=""
+                defaultValue="0"
                 value={props.genreFilter}
                 onChange={handleGenreChange}
     >
@@ -122,7 +122,7 @@ export default function FilterMoviesCard(props) {
                 id="sort-select"
                 defaultValue=""
                 value={props.genreFilter}
-                onChange={(e) => props.onSortChange(e.target.value)}
+                onChange={props.onSortChange}
             >
                <MenuItem value="title">Title</MenuItem>
                <MenuItem value="rating">Rating</MenuItem>

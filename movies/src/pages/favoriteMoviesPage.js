@@ -6,6 +6,7 @@ import { getMovie } from "../api/tmdb-api";
 import Spinner from '../components/spinner'
 import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
 import WriteReview from "../components/cardIcons/writeReview";
+import FilterMoviesCard from "../components/filterMoviesCard";
 
 const FavoriteMoviesPage = () => {
   const {favorites: movieIds } = useContext(MoviesContext);
@@ -25,6 +26,17 @@ const FavoriteMoviesPage = () => {
   if (isLoading) {
     return <Spinner />;
   }
+
+if(movieIds.length===0){
+  return(
+    <div style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
+      <FilterMoviesCard/>
+    
+    </div>
+  );
+}
+
+
 
   const movies = favoriteMovieQueries.map((q) => {
     q.data.genre_ids = q.data.genres.map(g => g.id)
