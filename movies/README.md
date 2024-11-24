@@ -18,10 +18,10 @@ Name: [JIAYI SHAO]
 + Customize the new theme see file theme.js
 + Use of new MUIs such as Box, Pagination, etc.
 + Implement responsive layout for movie list page
-Support paging through movie list.
++ Support paging through movie list.
 + Supports filtering and sorting of movie list to improve user experience.
 + Support adding watchlist and removing watchlist for movies.
-+ 
++ Enlargement of moviecard on hover with hover
 + 
 + 
 + 
@@ -38,7 +38,17 @@ Support paging through movie list.
 e.g.
 + Discover list of movies - discover/movie
 + Movie details - movie/:id
-+ Movie genres = /genre/movie/list
++ Movie genres - /genre/movie/list
++ Trending movies - /trending/all/day
++ Actor details - /person/:id
++ Trending movies - /movie/now_playing
++ Upcoming movies - /movie/upcoming
++ Recommendations -  /movie/:id/recommendations
++ Movie Cast List - /movie/:id/credits
++ Reviews - /movie/:id/reviews
++ Images - /movie/:id/images
++ Filter by Rating - /discover/movie
+
 
 ## Routing.
 
@@ -47,7 +57,18 @@ e.g.
 + /blogs - displays all published blogs.
 + /blogs/:id - displays a particular blog.
 + /blogs/:id/comments - detail view of a particular blog and its comments.
-+ etc.
++ / - showing a list of recommended movies
++ /movies/favorites -showing movies that have been added to the collection.
++ /movies/upcoming -  displays a list of upcoming movies.
++ /movies/trending/:timeWindow - displays daily or weekly trending movies based on a time window.
++ /movie/now_playing - showing movies currently playing in theaters.
++ /movies/watchlist - showing movies that the user has marked for later viewing.
++ /movies/:id - showing details about a specific movie.
++ /reviews/:id - showing the content of reviews for a specific movie.
++ /reviews/form- allows users to add a review for a specific movie.
++ /person/:personId- displays the details of a specific actor and the movies they are involved in.
+
+
 
 [If relevant, state what aspects of your app are protected (i.e. require authentication) and what is public.]
 
