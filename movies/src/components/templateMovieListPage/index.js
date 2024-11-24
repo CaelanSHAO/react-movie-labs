@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
@@ -6,8 +6,7 @@ import Grid from "@mui/material/Grid2";
 import { QueryClientProvider, QueryClient, useQuery } from "react-query";
 import { Box } from "@mui/material";
 import { Pagination } from "@mui/material";
-import { getMovies } from "../../api/tmdb-api";
-import { get } from "react-hook-form";
+import { MoviesContext } from '../../contexts/moviesContext'
 
 
 const queryClient = new QueryClient({
@@ -21,6 +20,7 @@ const queryClient = new QueryClient({
   });
 
 function MovieListPageTemplate({movies, title, action }) {
+  const {page,  handlePageChange } = useContext(MoviesContext);
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
@@ -28,10 +28,8 @@ function MovieListPageTemplate({movies, title, action }) {
 
   const [ratingFilter, setRatingFilter] = useState("");
   const [sortKey, setSortKey] = useState("title");
-
-
-  const [page, setPage] = useState(1);
   const totalPages = 20;
+
 
   
   /*   const fetchMovies=async(page)=>{
@@ -66,15 +64,15 @@ function MovieListPageTemplate({movies, title, action }) {
     // );
 
 
-    const handlePageChange = (event, value) => {
-      if (value < 1 || value > totalPages) {
-        console.error("Page out of bounds:", value);
-        setPage(1);
-        return;
-    }
-     console.log("Changing to page:", value);
-      setPage(value);
-    };
+    // const handlePageChange = (event, value) => {
+    //   if (value < 1 || value > totalPages) {
+    //     console.error("Page out of bounds:", value);
+    //     setPage(1);
+    //     return;
+    // }
+    //  console.log("Changing to page:", value);
+    //   setPage(value);
+    // };
 
   let displayedMovies = (movies || [])
     .filter((m) => {

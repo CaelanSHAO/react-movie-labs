@@ -1,15 +1,11 @@
 import axios from 'axios';
 
-const API_KEY = process.env.REACT_APP_TMDB_KEY;
-const BASE_URL = "https://api.themoviedb.org/3";
 
-export const getMovies =async ({ page = 1, genreFilter, ratingFilter }) => {
-  const genreParam = genreFilter && genreFilter !== "0" ? `&with_genres=${genreFilter}` : "";
-  const ratingParam = ratingFilter
-    ? `&vote_average.gte=${ratingFilter.split("-")[0]}&vote_average.lte=${ratingFilter.split("-")[1]}`
-    : "";
+export const getMovies = (args) => {
+  const [, pagePart] = args.queryKey;
+    const { page } = pagePart;
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}${genreParam}${ratingParam}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
   ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
@@ -152,15 +148,24 @@ export const getTrendingToday = ({ queryKey }) => {
    });
   };
 
-  export const getUpcomingMovies = async () => {
-    const response = await axios.get(`${BASE_URL}/movie/upcoming`, {
-      params: {
-        api_key: API_KEY,
-      },
+  export const getUpcomingMovies = async (args) => {
+    const [, pagePart] = args.queryKey;
+    const { page } = pagePart;
+    return fetch(
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
+    ).then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.status_message || "Something went wrong");
+        });
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      console.error(`Failed to fetch movies: ${error.message}`);
+      return { results: [], error: error.message }; 
     });
-    return response.data;
   };
-
 
   export const getPersonDetails = (personId) => {
     return fetch(

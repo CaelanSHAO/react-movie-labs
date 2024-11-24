@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Assignment 1 - ReactJS app.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Name: [JIAYI SHAO]
 
-## Available Scripts
+## Overview.
 
-In the project directory, you can run:
+[This repository contains a ReactJS-based Movies Fan application that utilizes The Movie Database (TMDB) API. Users can explore movies, add favorites or watchlist, filter by genres, and see details about movies and actors. It also includes pagination, sorting, responsive layouts, and React Query for better data handling.]
 
-### `npm start`
+### Features.
+[ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
+ 
++ Static endpoint calls on UpcomingPage and NowPlayingPage.
++ Dynamic endpoint calls on TrendingTodayPage and ActorDetailsPage
++ Show actor details and link to the movie they are in in ActorDetailsPage. Link to recommended movies in MovieDetailsPage.
++ react-query stores static endpoints and dynamic endpoints to provide real-time API data dynamic update
++ Implementation of new filtering options like ratingFilter.
++ New filtering options such as ratingFilter.
++ Customize the new theme see file theme.js
++ Use of new MUIs such as Box, Pagination, etc.
++ Implement responsive layout for movie list page
+Support paging through movie list.
++ Supports filtering and sorting of movie list to improve user experience.
++ Support adding watchlist and removing watchlist for movies.
++ 
++ 
++ 
++ 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setup requirements.
 
-### `npm test`
+[ Outline any non-standard setup steps necessary to run your app locally after cloning the repo.]
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## API endpoints.
 
-### `npm run build`
+[ List the __additional__ TMDB endpoints used, giving the description and pathname for each one.] 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+e.g.
++ Discover list of movies - discover/movie
++ Movie details - movie/:id
++ Movie genres = /genre/movie/list
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Routing.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[ List the __new routes__ supported by your app and state the associated page.]
 
-### `npm run eject`
++ /blogs - displays all published blogs.
++ /blogs/:id - displays a particular blog.
++ /blogs/:id/comments - detail view of a particular blog and its comments.
++ etc.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+[If relevant, state what aspects of your app are protected (i.e. require authentication) and what is public.]
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Independent learning (If relevant).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Itemize the technologies/techniques you researched independently and adopted in your project, 
+i.e. aspects not covered in the lectures/labs. Include the source code filenames that illustrate these 
+(we do not require code excerpts) and provide references to the online resources that helped you (articles/blogs).

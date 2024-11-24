@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { set } from "react-hook-form";
 
 export const MoviesContext = React.createContext(null);
 
 const MoviesContextProvider = (props) => {
-  const [favorites, setFavorites] = useState( [] )
-  const [myReviews, setMyReviews] = useState( {} ) 
+  const [favorites, setFavorites] = useState( [] );
+  const [myReviews, setMyReviews] = useState( {} );
   const [watchlist, setWatchlist] = useState([]);
+  const [page, setPage] = useState(1);
+  const totalPages = 20;
 
   const addToFavorites = (movie) => {
     let newFavorites = [];
@@ -17,6 +20,16 @@ const MoviesContextProvider = (props) => {
       newFavorites = [...favorites];
     }
     setFavorites(newFavorites)
+  };
+
+  const handlePageChange = (event, value) => {
+    if (value < 1 || value > totalPages) {
+      console.error("Page out of bounds:", value);
+      setPage(1);
+      return;
+  }
+   console.log("Changing to page:", value);
+    setPage(value);
   };
 
   
@@ -59,6 +72,8 @@ const MoviesContextProvider = (props) => {
         addToWatchlist,
         removeFromWatchlist,
         addReview,
+        page,
+        handlePageChange,
       }}
     >
       {props.children}
